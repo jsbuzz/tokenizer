@@ -1,0 +1,19 @@
+{
+  "name": "tokenizer",
+  "version": "1.0.0",
+  "description": "HTML parser",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jsbuzz/tokenizer.git"
+  },
+  "author": "Matyas Buczko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jsbuzz/tokenizer/issues"
+  },
+  "homepage": "https://github.com/jsbuzz/tokenizer#readme"
+}
