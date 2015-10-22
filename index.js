@@ -12,14 +12,16 @@ parser.end();
 
 //console.log(stringFinder.keys);
 var htmlText = html.toString();
-stringFinder.rxs.forEach(function(regex, i) {
-    var rx = new RegExp(regex);
+var i = 0;
+Object.keys(stringFinder.rxs).forEach(function(key) {
+    var rx = new RegExp(stringFinder.rxs[key], 'g');
     if(!rx.test(html)) {
         console.log(regex, 'not found');
     } else {
-        //console.log(html.toString());
         htmlText = htmlText.replace(rx, '${' + i + '}');
     }
+    // bump key index for test
+    i ++;
 });
 console.log(htmlText);
-console.error(stringFinder.keys);
+console.error(Object.keys(stringFinder.rxs));

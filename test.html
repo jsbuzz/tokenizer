@@ -9,11 +9,12 @@
 </header>
 
 <div class="page-title">
-    <h1 ng-if="program = 'FEECREDIT'">This is the chance for you to earn {{payout}} credits</h1>
-    <h1 ng-if="program = 'N_FOR_PAYOUT'">Earn {{currency}}{{payout}} for every 3 friends you invite</h1>
+    <h1 ng-if="program == 'FEECREDIT'">This is the chance for you to earn {{payout}} credits</h1>
+    <h1 ng-if="program == 'N_FOR_PAYOUT'">Earn {{currency}}{{payout}} for every 3 friends you invite</h1>
 </div>
 
 <div class="b-transfer-flow-main__body l-row">
+    <div>This is the chance for you to earn {{payout}} credits</div>
     <iframe ng-if="verificationData.jumioJourneyInProgress()"  ng-src="{{verificationData.iframeUrl}}" id="jumioOuterContainer" width="800" height="600" scrolling="no" frameborder="0" marginwidth="0" marginheight="0" ></iframe>
 
     <div class="l-span-14">

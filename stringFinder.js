@@ -3,10 +3,11 @@ var stringFinder = {
     textDepth : 0,
     currentKey : '',
     currentRx : '',
-    keys: [],
-    rxs: [],
+    strings: [],
+    rxs: {},
     inlineTags : {'b' : 1, 'strong' : 1, 'i' : 1, 'u' : 1, 'span' : 1},
-    ignoredTags: {'script' : 1, 'style' : 1}
+    ignoredTags: {'script' : 1, 'style' : 1},
+    tagRX: '\\s*<[^>]*>\\s*'
 };
 
 stringFinder.createInlineTag = function(tag, attributes) {
@@ -21,7 +22,7 @@ stringFinder.onopentag = function(tagName, attributes) {
     this.path.push(tagName);
     if(this.textDepth || this.inlineTags[tagName]) {
         this.currentKey += this.createInlineTag(tagName, attributes);
-        this.currentRx += '\\s*<[^>]*>\\s*'
+        this.currentRx += this.tagRX;
         if(!this.textDepth) {
             this.textDepth = this.path.length - 1;
         }
@@ -45,11 +46,11 @@ stringFinder.onclosetag = function(tagName) {
     this.path.pop();
     if(this.path.length >= this.textDepth) {
         this.currentKey += '</' + tagName + '>';
-        this.currentRx += '\\s*<[^>]*>\\s*';
+        this.currentRx += this.tagRX;
     } else if(this.path.length == this.textDepth-1) {
-        //console.log('saving', this.currentRx.trim());
-        this.keys.push(this.currentKey.trim());
-        this.rxs.push(this.currentRx.trim());
+        var key = this.currentKey.trim();
+        this.strings.push(key);
+        this.rxs[key] = this.currentRx.trim();
         this.currentKey = '';
         this.currentRx = '';
         this.textDepth = 0;
